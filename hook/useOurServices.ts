@@ -138,10 +138,10 @@ export const useOurServices = (limit = 2, offset = 0) => {
   const ourServicesQuery = useQuery({
     queryKey: ["ourServices", limit, offset],
     queryFn: () => ourServiceService.getAll({ limit, offset }),
-
-    // v5 replacement for keepPreviousData
-    placeholderData: (prev) => prev,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
+
 
   // CREATE
   const createMutation = useMutation({
@@ -163,11 +163,7 @@ export const useOurServices = (limit = 2, offset = 0) => {
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["ourServices"] }),
   });
-
-  // console.log("haha hook ourServicesQuery",ourServicesQuery)
-  // console.log("haha hook ourServices",ourServicesQuery.data?.data )
-  // console.log("haha hook ourServicesQuery.data?.total",ourServicesQuery.data?.total)
-
+  
   return {
     //ourServicesQuery,
     ourServices: ourServicesQuery.data?.data ?? [],

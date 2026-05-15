@@ -1,11 +1,6 @@
 import apiClient from "@/lib/apiClient";
 
 export const ourServiceService = {
-  // getAll: async () => {
-  //   const res = await apiClient.get("/services");
-  //   return res.data;
-  // },
-
   getAll: async ({ limit, offset }: { limit: number; offset: number }) => {
     const res = await apiClient.get("/services", {
       params: { limit, offset },
