@@ -6,7 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import React from "react"; 
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useOurServiceStore } from "@/store/useOurServiceStore";
 import { useOurServices } from "@/hook/useOurServices";
@@ -19,9 +19,10 @@ export default function OurServiceModal() {
 
   const form = useForm({
     defaultValues: {
-      name: "",
-      email: "",
-      role: "",
+      name_en: "",
+      name_mm: "",
+      description_en: "",
+      description_mm: ""
     },
   });
 
@@ -45,44 +46,57 @@ export default function OurServiceModal() {
   //   setCreateModalOpen(false);
   // };
 
+  const handleClose = (open: boolean) => {
+    setCreateModalOpen(open);
 
-const onSubmit = async (values: any) => {
-  try {
-    if (editData) {
-      await updateOurService({
-        uuid: editData.uuid,
-        data: values,
+    if (!open) {
+      form.reset({
+        name_en: "",
+        name_mm: "",
+        description_en: "",
+        description_mm: ""
       });
-
-      toast.success("Service updated successfully");
-    } else {
-      await createOurService(values);
-
-      toast.success("Service created successfully");
+      reset(); // Clears editData from Zustand
     }
+  };
 
-    reset();
-    setCreateModalOpen(false);
-  } catch (error: any) {
-    toast.error(
-      error?.response?.data?.message || "Something went wrong"
-    );
-  }
-};
+
+  const onSubmit = async (values: any) => {
+    try {
+      if (editData) {
+        await updateOurService({
+          uuid: editData.uuid,
+          data: values,
+        });
+
+        toast.success("Service updated successfully");
+      } else {
+        await createOurService(values);
+
+        toast.success("Service created successfully");
+      }
+
+      handleClose(false);
+    } catch (error: any) {
+      toast.error(
+        error?.response?.data?.message || "Something went wrong"
+      );
+    }
+  };
 
   return (
-    <Dialog open={createModalOpen} onOpenChange={setCreateModalOpen}>
-     <DialogContent className="max-w-2xl w-[calc(100%-20px)] max-h-[90vh] overflow-y-auto overflow-x-visible rounded-2xl p-6">
-      <DialogHeader className="shrink-0">
-        <DialogTitle className="text-center text-orange-600 text-lg font-semibold">
-          {editData ? "Edit Service" : "Create Service"}
-        </DialogTitle>
-      </DialogHeader>
+    <Dialog open={createModalOpen} onOpenChange={handleClose}>
+      <DialogContent className="max-w-2xl w-[calc(100%-20px)] max-h-[90vh] overflow-y-auto overflow-x-visible rounded-2xl p-6">
+        <DialogHeader className="shrink-0">
+          <DialogTitle className="text-center text-orange-600 text-lg font-semibold">
+            {editData ? "Edit Service" : "Create Service"}
+          </DialogTitle>
+        </DialogHeader>
 
-      <div className="flex-1 overflow-y-auto pr-2">
-        <OurServiceForm editData={editData} form={form} onSubmit={onSubmit} />
-      </div>
-    </DialogContent>
+        <div className="flex-1 overflow-y-auto pr-2">
+          <OurServiceForm editData={editData} form={form} onSubmit={onSubmit} />
+        </div>
+      </DialogContent>
     </Dialog>
   );
 }

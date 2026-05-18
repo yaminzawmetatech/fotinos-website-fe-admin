@@ -226,7 +226,7 @@ import { ourServiceColumns } from "./columns";
 import DataTable from "@/components/common/DataTable";
 
 export default function OurServicesTable() {
-  const LIMIT = 2; // limit per page
+  const LIMIT = 10; // limit per page
   const [offset, setOffset] = useState(0);
   const { ourServices, total, isLoading } = useOurServices(LIMIT, offset);
   
