@@ -7,17 +7,18 @@ import { useOurServices } from "@/hook/useOurServices";
 import FormSelect from "../common/FormSelect";
 import { usePlans } from "@/hook/usePlans";
 import FormCheckbox from "../common/FormCheckbox";
+import { useModules } from "@/hook/useModules";
 
 export default function PlanVideoForm({ form, onSubmit, editData }: any) {
   const { register, handleSubmit, reset, control } = form;
 
-  const { ourServices, isLoading } = useOurServices();
+  const { modules, isLoading } = useModules();
   const { plans, isLoading: planLoading } = usePlans();
 
   // Format array payload into simple standard options
-  const serviceOptions = (ourServices || []).map((service: any) => ({
-    id: service.id,
-    name: service.name_en,
+  const moduleOptions = (modules || []).map((module: any) => ({
+    id: module.id,
+    name: module.module_name_en,
   }));
 
   // Format array payload into simple standard options
@@ -74,7 +75,7 @@ export default function PlanVideoForm({ form, onSubmit, editData }: any) {
       <FormSelect
         name="module_id"
         control={control}
-        options={serviceOptions}
+        options={moduleOptions}
         label="Module"
         rules={{ required: "Module is required" }}
       />

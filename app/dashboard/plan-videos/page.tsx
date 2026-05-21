@@ -11,7 +11,7 @@ export default function UsersPage() {
   return (
     <div className="p-6">
       <div className="flex justify-between mb-6">
-        <h1 className="text-2xl font-semibold">Plans</h1>
+        <h1 className="text-2xl font-semibold">Plan Videos</h1>
 
         <Button
           onClick={() => setCreateModalOpen(true)}

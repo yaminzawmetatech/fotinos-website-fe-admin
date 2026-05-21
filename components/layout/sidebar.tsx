@@ -10,8 +10,8 @@ const menuItems = [
   { href: "/dashboard/services", label: "Services", icon: Blocks },
   { href: "/dashboard/payment-methods", label: "Payment Methods", icon: BadgeDollarSign },
   { href: "/dashboard/plans", label: "Plans", icon: NotebookPen  },
-  { href: "/dashboard/plan-videos", label: "Plan Video", icon: Video  },
   { href: "/dashboard/modules", label: "Modules", icon: Layers  },
+  { href: "/dashboard/plan-videos", label: "Plan Videos", icon: Video  },
   { href: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 
