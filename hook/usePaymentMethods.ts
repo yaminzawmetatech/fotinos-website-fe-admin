@@ -3,7 +3,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { paymentMethodService } from "@/services/paymentMethodService";
 
-export const usePaymentMethods = (limit = 2, offset = 0) => {
+export const usePaymentMethods = (limit = 10, offset = 0) => {
   const queryClient = useQueryClient();
 
   const paymentMethodsQuery = useQuery({

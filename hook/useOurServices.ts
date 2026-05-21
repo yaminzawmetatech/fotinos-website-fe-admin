@@ -132,7 +132,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { ourServiceService } from "@/services/ourServiceService";
 
-export const useOurServices = (limit = 2, offset = 0) => {
+export const useOurServices = (limit = 10, offset = 0) => {
   const queryClient = useQueryClient();
 
   const ourServicesQuery = useQuery({

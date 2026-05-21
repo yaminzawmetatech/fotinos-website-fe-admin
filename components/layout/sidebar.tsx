@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Users, Settings,Blocks, BadgeDollarSign, NotebookPen } from "lucide-react";
+import { Home, Users, Settings,Blocks, BadgeDollarSign, NotebookPen, Layers } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -10,6 +10,7 @@ const menuItems = [
   { href: "/dashboard/services", label: "Services", icon: Blocks },
   { href: "/dashboard/payment-methods", label: "Payment Methods", icon: BadgeDollarSign },
   { href: "/dashboard/plans", label: "Pans", icon: NotebookPen  },
+  { href: "/dashboard/modules", label: "Modules", icon: Layers  },
   { href: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 
