@@ -22,6 +22,10 @@ export const moduleColumns: ColumnDef<any>[] = [
     header: "Name (MM)",
   },
   {
+    accessorKey: "plan.name_en",
+    header: "Plan Name (EN)",
+  },
+  {
     accessorKey: "module_order",
     header: "Order",
   },
