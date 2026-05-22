@@ -94,13 +94,11 @@ export const planColumns: ColumnDef<any>[] = [
     header: "No",
     cell: ({ row }) => row.index + 1,
     size: 60,
-    enablePinning: true,
   },
   {
     accessorKey: "name_en",
     header: "Name (EN)",
     size: 180,
-    enablePinning: true,
   },
   {
     accessorKey: "name_mm",
@@ -136,7 +134,6 @@ export const planColumns: ColumnDef<any>[] = [
     id: "actions",
     header: "Actions",
     size: 160,
-    enablePinning: true,
     cell: ({ row }) => {
       const item = row.original;
       const { setEditData, setCreateModalOpen } = usePlanStore();

@@ -566,6 +566,8 @@ type DataTableProps<T> = {
   offset: number;
   setOffset: (value: number | ((prev: number) => number)) => void;
   isLoading?: boolean;
+  columnPinning: ColumnPinningState;
+  setColumnPinning: React.Dispatch<React.SetStateAction<ColumnPinningState>>;
 };
 
 export default function DataTable<T>({
@@ -576,14 +578,11 @@ export default function DataTable<T>({
   offset,
   setOffset,
   isLoading,
+  columnPinning,
+  setColumnPinning
 }: DataTableProps<T>) {
   const currentPage = offset / limit + 1;
   const totalPages = Math.ceil(total / limit);
-
-  const [columnPinning, setColumnPinning] = useState<ColumnPinningState>({
-    left: ["no", "name_en"],
-    right: ["actions"],
-  });
 
   const table = useReactTable({
     data,

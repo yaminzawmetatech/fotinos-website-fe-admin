@@ -11,20 +11,25 @@ import { Badge } from "@/components/ui/badge";
 
 export const planVideoColumns: ColumnDef<any>[] = [
   {
+    accessorKey: "no",
     header: "No",
     cell: ({ row }) => row.index + 1,
+    size: 60,
   },
   {
     accessorKey: "name_en",
     header: "Name (EN)",
+    size: 150,
   },
   {
     accessorKey: "name_mm",
     header: "Name (MM)",
+    size: 150,
   },
   {
     accessorKey: "video_link",
     header: "Video Link",
+    size: 300,
     cell: ({ getValue }) => {
       const link = getValue() as string;
 
@@ -35,7 +40,7 @@ export const planVideoColumns: ColumnDef<any>[] = [
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-800 hover:underline max-w-[200px] block truncate"
+          className="text-blue-600 hover:text-blue-800 hover:underline max-w-[300px] block truncate"
           title={link}
         >
           {link}
@@ -46,10 +51,12 @@ export const planVideoColumns: ColumnDef<any>[] = [
   {
     accessorKey: "video_order",
     header: "Video Order",
+    size: 60,
   },
   {
     accessorKey: "is_free",
     header: "Is Free",
+    size: 100,
     // FIXED: Convert 1/0 or true/false to styled visual chips
     cell: ({ getValue }) => {
       const isFree = getValue();

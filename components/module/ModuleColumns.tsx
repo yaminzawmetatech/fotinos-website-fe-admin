@@ -10,6 +10,7 @@ import { useModules } from "@/hook/useModules";
 
 export const moduleColumns: ColumnDef<any>[] = [
   {
+    accessorKey: "no",
     header: "No",
     cell: ({ row }) => row.index + 1,
   },

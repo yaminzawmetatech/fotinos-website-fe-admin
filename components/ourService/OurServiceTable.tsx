@@ -224,11 +224,19 @@ import { useState } from "react";
 import { useOurServices } from "@/hook/useOurServices";
 import { ourServiceColumns } from "./columns";
 import DataTable from "@/components/common/DataTable";
+import { ColumnPinningState } from "@tanstack/react-table";
+
 
 export default function OurServicesTable() {
   const LIMIT = 10; // limit per page
   const [offset, setOffset] = useState(0);
   const { ourServices, total, isLoading } = useOurServices(LIMIT, offset);
+
+  // dynamic column pinning state
+  const [columnPinning, setColumnPinning] = useState<ColumnPinningState>({
+    left: ["no", "name_en"],
+    right: ["actions"],
+  });
   
 
   return (
@@ -241,6 +249,8 @@ export default function OurServicesTable() {
         offset={offset}
         setOffset={setOffset}
         isLoading={isLoading}
+        columnPinning={columnPinning}
+        setColumnPinning={setColumnPinning}
       />
     </div>
   );

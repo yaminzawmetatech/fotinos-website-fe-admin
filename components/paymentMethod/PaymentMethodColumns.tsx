@@ -10,6 +10,7 @@ import { usePaymentMethods } from "@/hook/usePaymentMethods";
 
 export const paymentMethodsColumns: ColumnDef<any>[] = [
   {
+    accessorKey: "no",
     header: "No",
     cell: ({ row }) => row.index + 1,
   },
