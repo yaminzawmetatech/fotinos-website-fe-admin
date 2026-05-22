@@ -82,6 +82,7 @@ export const planVideoColumns: ColumnDef<any>[] = [
   {
     id: "actions",
     header: "Actions",
+    size: 120,
     cell: ({ row }) => {
       const item = row.original;
       const { setEditData, setCreateModalOpen } = usePlanVideoStore();

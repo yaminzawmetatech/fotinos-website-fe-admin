@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DataTable from "@/components/common/DataTable";
 import { planColumns } from "./PlanColumns";
 import { usePlans } from "@/hook/usePlans";
@@ -17,6 +17,26 @@ export default function PlansTable() {
     left: ["no", "name_en"],
     right: ["actions"],
   });
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        // Mobile phone: Unpin everything so it scrolls nicely
+        setColumnPinning({ left: [], right: [] });
+      } else {
+        // Desktop/Tablet: Keep your clean layout locks
+        setColumnPinning({
+          left: ["no", "name_en"],
+          right: ["actions"],
+        });
+      }
+    };
+
+    // Run on initial load & layout changes
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
 
   return (

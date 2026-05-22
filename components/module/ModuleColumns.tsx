@@ -13,26 +13,32 @@ export const moduleColumns: ColumnDef<any>[] = [
     accessorKey: "no",
     header: "No",
     cell: ({ row }) => row.index + 1,
+    size: 60,
   },
   {
     accessorKey: "module_name_en",
     header: "Name (EN)",
+    size: 150,
   },
   {
     accessorKey: "module_name_mm",
     header: "Name (MM)",
+    size: 150,
   },
   {
     accessorKey: "plan.name_en",
     header: "Plan Name (EN)",
+    size: 150,
   },
   {
     accessorKey: "module_order",
     header: "Order",
+    size: 150,
   },
   {
     id: "actions",
     header: "Actions",
+    size: 120,
     cell: ({ row }) => {
       const item = row.original;
       const { setEditData, setCreateModalOpen } = useModuleStore();

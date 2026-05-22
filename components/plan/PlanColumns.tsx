@@ -98,32 +98,32 @@ export const planColumns: ColumnDef<any>[] = [
   {
     accessorKey: "name_en",
     header: "Name (EN)",
-    size: 180,
+    size: 150,
   },
   {
     accessorKey: "name_mm",
     header: "Name (MM)",
-    size: 180,
+    size: 150,
   },
   {
     accessorKey: "description_en",
     header: "Description (EN)",
-    size: 300,
+    size: 150,
   },
   {
     accessorKey: "description_mm",
     header: "Description (MM)",
-    size: 300,
+    size: 150,
   },
   {
     accessorKey: "outline_en",
     header: "Outline (EN)",
-    size: 200,
+    size: 150,
   },
   {
     accessorKey: "outline_mm",
     header: "Outline (MM)",
-    size: 200,
+    size: 150,
   },
   {
     accessorKey: "price",
@@ -133,7 +133,7 @@ export const planColumns: ColumnDef<any>[] = [
   {
     id: "actions",
     header: "Actions",
-    size: 160,
+    size: 150,
     cell: ({ row }) => {
       const item = row.original;
       const { setEditData, setCreateModalOpen } = usePlanStore();
