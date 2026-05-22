@@ -7,6 +7,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { usePlanVideoStore } from "@/store/usePlanVideoStore";
 import { usePlanVideos } from "@/hook/usePlanVideos";
+import { Badge } from "@/components/ui/badge";
 
 export const planVideoColumns: ColumnDef<any>[] = [
   {
@@ -24,6 +25,23 @@ export const planVideoColumns: ColumnDef<any>[] = [
   {
     accessorKey: "video_link",
     header: "Video Link",
+    cell: ({ getValue }) => {
+      const link = getValue() as string;
+
+      if (!link) return <span className="text-muted-foreground">-</span>;
+
+      return (
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:text-blue-800 hover:underline max-w-[200px] block truncate"
+          title={link}
+        >
+          {link}
+        </a>
+      );
+    },
   },
   {
     accessorKey: "video_order",
@@ -32,6 +50,27 @@ export const planVideoColumns: ColumnDef<any>[] = [
   {
     accessorKey: "is_free",
     header: "Is Free",
+    // FIXED: Convert 1/0 or true/false to styled visual chips
+    cell: ({ getValue }) => {
+      const isFree = getValue();
+
+      // Handles checking if your backend returns 1, "1", true, or "true"
+      const truthy = isFree === 1 || isFree === "1" || isFree === true || String(isFree).toLowerCase() === "true";
+
+      if (truthy) {
+        return (
+          <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 border-none shadow-none font-medium px-2.5 py-0.5 rounded-full">
+            Yes
+          </Badge>
+        );
+      }
+
+      return (
+        <Badge variant="secondary" className="bg-neutral-100 text-neutral-600 hover:bg-neutral-100 border-none shadow-none font-medium px-2.5 py-0.5 rounded-full">
+          No
+        </Badge>
+      );
+    },
   },
   {
     id: "actions",
