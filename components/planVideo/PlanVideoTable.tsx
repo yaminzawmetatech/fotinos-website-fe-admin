@@ -19,7 +19,7 @@ export default function PlanVideosTable() {
   });
 
   return (
-    <div className="p-6">
+    <div>
       <DataTable
         data={planVideos}
         columns={planVideoColumns}

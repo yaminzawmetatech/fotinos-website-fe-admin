@@ -19,7 +19,7 @@ export default function ModulesTable() {
   });
   
   return (
-    <div className="p-6">
+    <div>
       <DataTable
         data={modules}
         columns={moduleColumns}

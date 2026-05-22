@@ -40,7 +40,7 @@ export default function PlansTable() {
 
 
   return (
-    <div className="p-6">
+    <div>
       <DataTable
         data={plans}
         columns={planColumns}

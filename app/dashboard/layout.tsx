@@ -62,13 +62,14 @@ export default function DashboardLayout({ children } : { children: React.ReactNo
 
     return (
       <div className="flex h-screen w-full overflow-hidden bg-gray-50">
-        <Sidebar />
+        {open && <Sidebar />}
+
   
         <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
   
           <main className="flex-1 overflow-y-auto p-4 md:p-6 min-w-0">
             <Topbar onToggleSidebar={() => setOpen(!open)} />
-            <div className="p-6">{children}</div>
+            <div className="p-1">{children}</div>
           </main>
         </div>
       </div>

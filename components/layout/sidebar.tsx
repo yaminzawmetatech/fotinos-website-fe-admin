@@ -69,7 +69,7 @@ export function Sidebar() {
         
         {/* Header */}
         <div className="h-20 px-4 md:px-5 border-b flex items-center justify-center md:justify-start gap-3">
-          <img src="/logo.png" className="w-10 h-10 object-contain min-w-[40px]" />
+          <img src="/logo.png" className="w-18 h-18 object-contain min-w-[40px]" />
   
           {/* 2. Hide text block on mobile, display block on desktop panels */}
           <div className="leading-tight hidden md:block">
