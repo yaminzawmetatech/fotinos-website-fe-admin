@@ -49,14 +49,31 @@ export default function DashboardLayout({ children } : { children: React.ReactNo
   }
 
 
-  return (
-    <div className="flex">
-      {open && <Sidebar />}
+  // return (
+  //   <div className="flex">
+  //     {open && <Sidebar />}
 
-      <div className="flex-1">
-        <Topbar onToggleSidebar={() => setOpen(!open)} />
-        <div className="p-6">{children}</div>
+  //     <div className="flex-1">
+  //       <Topbar onToggleSidebar={() => setOpen(!open)} />
+  //       <div className="p-6">{children}</div>
+  //     </div>
+  //   </div>
+  // );
+
+    return (
+      <div className="flex h-screen w-full overflow-hidden bg-gray-50">
+        {/* Your Sidebar Component */}
+        <Sidebar />
+  
+        {/* MAIN VIEWPORT LAYOUT PANEL */}
+        <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
+  
+          {/* CONTENT VIEWPORT */}
+          <main className="flex-1 overflow-y-auto p-4 md:p-6 min-w-0">
+            <Topbar onToggleSidebar={() => setOpen(!open)} />
+            <div className="p-6">{children}</div>
+          </main>
+        </div>
       </div>
-    </div>
-  );
+    );
 }

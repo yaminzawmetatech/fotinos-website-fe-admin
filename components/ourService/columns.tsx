@@ -57,6 +57,7 @@ import { useOurServices } from "@/hook/useOurServices";
 
 export const ourServiceColumns: ColumnDef<any>[] = [
   {
+    accessorKey: "no",
     header: "No",
     cell: ({ row }) => row.index + 1,
   },
