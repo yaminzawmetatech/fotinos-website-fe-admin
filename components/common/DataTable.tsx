@@ -630,9 +630,9 @@ export default function DataTable<T>({
                     <th
                       key={header.id}
                       style={pinnedStyles}
-                      className={`px-4 py-3.5 font-semibold text-orange-950 bg-orange-50/70 border-b border-orange-100/80
-                        ${isPinned === "left" ? "z-30 shadow-[2px_0_5px_-2px_rgba(249,115,22,0.12)]" : ""}
-                        ${isPinned === "right" ? "z-30 shadow-[-2px_0_5px_-2px_rgba(249,115,22,0.12)]" : ""}
+                      className={`px-4 py-3.5 font-semibold text-orange-950 bg-orange-100 border-b border-orange-200/80 sticky top-0
+                        ${isPinned === "left" ? "z-40 shadow-[2px_0_5px_-2px_rgba(249,115,22,0.12)]" : "z-20"}
+                        ${isPinned === "right" ? "z-40 shadow-[-2px_0_5px_-2px_rgba(249,115,22,0.12)]" : ""}
                       `}
                     >
                       {flexRender(
