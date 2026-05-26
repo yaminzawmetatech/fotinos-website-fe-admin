@@ -108,10 +108,10 @@ export function Sidebar() {
         })}
       </nav>
 
-{/* Footer */}
-<div className="p-4 border-t text-xs text-gray-400 overflow-hidden whitespace-nowrap opacity-0 md:opacity-100 max-h-0 md:max-h-20 transition-all duration-300">
-  © 2026 Fotinos IT Solutions
-</div>
+      {/* Footer */}
+      <div className="p-4 border-t text-xs text-gray-400 overflow-hidden whitespace-nowrap opacity-0 md:opacity-100 max-h-0 md:max-h-20 transition-all duration-300">
+        © 2026 Fotinos IT Solutions
+      </div>
     </div>
   );
 }
