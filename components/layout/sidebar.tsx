@@ -1,18 +1,18 @@
 "use client";
 
-import { Home, Users, Settings,Blocks, BadgeDollarSign, NotebookPen, Video, Layers  } from "lucide-react";
+import { Home, Users, Settings, Blocks, BadgeDollarSign, NotebookPen, Video, Layers } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const menuItems = [
   { href: "/dashboard", label: "Dashboard", icon: Home },
-  // { href: "/dashboard/dashboard", label: "Users", icon: Users },
+  { href: "/dashboard/dashboard", label: "Users", icon: Users },
   { href: "/dashboard/services", label: "Services", icon: Blocks },
   { href: "/dashboard/payment-methods", label: "Payment Methods", icon: BadgeDollarSign },
-  { href: "/dashboard/plans", label: "Plans", icon: NotebookPen  },
-  { href: "/dashboard/modules", label: "Modules", icon: Layers  },
-  { href: "/dashboard/plan-videos", label: "Plan Videos", icon: Video  },
-  // { href: "/dashboard/settings", label: "Settings", icon: Settings },
+  { href: "/dashboard/plans", label: "Plans", icon: NotebookPen },
+  { href: "/dashboard/modules", label: "Modules", icon: Layers },
+  { href: "/dashboard/plan-videos", label: "Plan Videos", icon: Video },
+  { href: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 
 export function Sidebar() {
@@ -63,7 +63,6 @@ export function Sidebar() {
     //     © 2026 Fotinos IT Solutions
     //   </div>
     // </div>
-
       // 1. Change w-64 to w-16 on mobile, md:w-64 on desktop
       <div className="w-16 md:w-64 h-screen border-r bg-white flex flex-col transition-all">
         
@@ -111,7 +110,8 @@ export function Sidebar() {
         {/* 4. Hide footer notice text completely on mobile viewports */}
         <div className="p-4 border-t text-xs text-gray-400 hidden md:block">
           © 2026 Fotinos IT Solutions
-        </div>
-      </div>
+
+</div>
+    </div>
   );
 }
