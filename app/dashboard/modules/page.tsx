@@ -9,7 +9,7 @@ export default function ModulesPage() {
   const { setCreateModalOpen } = useModuleStore();
 
   return (
-    <div className="p-6">
+    <div className="p-2">
       <div className="flex justify-between mb-6">
         <h1 className="text-2xl font-semibold">Modules</h1>
 

@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from "react";
 import DataTable from "@/components/common/DataTable";
-import { planColumns } from "./PlanColumns";
+import { orderColumns } from "./OrderColumns";
 import { usePlans } from "@/hook/usePlans";
 import { ColumnPinningState } from "@tanstack/react-table";
 
@@ -43,7 +43,7 @@ export default function PlansTable() {
     <div>
       <DataTable
         data={plans}
-        columns={planColumns}
+        columns={orderColumns}
         total={total}
         limit={LIMIT}
         offset={offset}

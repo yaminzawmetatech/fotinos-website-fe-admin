@@ -13,26 +13,32 @@ export const paymentMethodsColumns: ColumnDef<any>[] = [
     accessorKey: "no",
     header: "No",
     cell: ({ row }) => row.index + 1,
+    size: 60,
   },
   {
     accessorKey: "name_en",
     header: "Name (EN)",
+    size: 150,
   },
   {
     accessorKey: "name_mm",
     header: "Name (MM)",
+    size: 150,
   },
   {
     accessorKey: "account_name",
     header: "Account Name",
+    size: 150,
   },
   {
     accessorKey: "account_number",
     header: "Account Number",
+    size: 150,
   },
   {
     id: "actions",
     header: "Actions",
+    size: 120,
     cell: ({ row }) => {
       const item = row.original;
       const { setEditData, setCreateModalOpen } = usePaymentMethodStore();

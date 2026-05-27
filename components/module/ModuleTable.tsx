@@ -14,12 +14,12 @@ export default function ModulesTable() {
 
   // dynamic column pinning state
   const [columnPinning, setColumnPinning] = useState<ColumnPinningState>({
-    left: ["no", "name_en"],
+    left: ["no", "module_name_en"],
     right: ["actions"],
   });
   
   return (
-    <div className="p-6">
+    <div>
       <DataTable
         data={modules}
         columns={moduleColumns}

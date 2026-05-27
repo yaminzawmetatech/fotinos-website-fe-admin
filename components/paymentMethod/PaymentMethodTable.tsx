@@ -21,7 +21,7 @@ export default function PaymentMethodsTable() {
   
 
   return (
-    <div className="p-6">
+    <div>
       <DataTable
         data={paymentMethods}
         columns={paymentMethodsColumns}

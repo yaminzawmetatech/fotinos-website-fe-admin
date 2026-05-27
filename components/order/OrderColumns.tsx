@@ -1,48 +1,50 @@
-
-
-
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { useModuleStore } from "@/store/useModuleStore";
-import { useModules } from "@/hook/useModules";
+import { usePlanStore } from "@/store/usePlanStore";
+import { usePlans } from "@/hook/usePlans";
 
-export const moduleColumns: ColumnDef<any>[] = [
+export const orderColumns: ColumnDef<any>[] = [
   {
-    accessorKey: "no",
+    id: "no",
     header: "No",
     cell: ({ row }) => row.index + 1,
     size: 60,
   },
   {
-    accessorKey: "module_name_en",
-    header: "Name (EN)",
+    accessorKey: "plan_id",
+    header: "Plan",
     size: 150,
   },
   {
-    accessorKey: "module_name_mm",
-    header: "Name (MM)",
+    accessorKey: "user_id",
+    header: "User",
     size: 150,
   },
   {
-    accessorKey: "plan.name_en",
-    header: "Plan Name (EN)",
+    accessorKey: "total_amount",
+    header: "Total Amount",
     size: 150,
   },
   {
-    accessorKey: "module_order",
-    header: "Order",
+    accessorKey: "status",
+    header: "Status",
+    size: 150,
+  },
+  {
+    accessorKey: "payment_method_id",
+    header: "Payment Method",
     size: 150,
   },
   {
     id: "actions",
     header: "Actions",
-    size: 120,
+    size: 150,
     cell: ({ row }) => {
       const item = row.original;
-      const { setEditData, setCreateModalOpen } = useModuleStore();
-      const { deleteModule } = useModules(); // TanStack Hook
+      const { setEditData, setCreateModalOpen } = usePlanStore();
+      const { deletePlan } = usePlans();
 
       return (
         <div className="flex gap-2">
@@ -53,7 +55,6 @@ export const moduleColumns: ColumnDef<any>[] = [
               setEditData(item);
               setCreateModalOpen(true);
             }}
-            className="border-orange-300 text-orange-600 hover:bg-orange-100"
           >
             Edit
           </Button>
@@ -63,7 +64,7 @@ export const moduleColumns: ColumnDef<any>[] = [
             variant="destructive"
             onClick={async () => {
               if (confirm("Are you sure?")) {
-                await deleteModule(item.uuid);
+                await deletePlan(item.uuid);
               }
             }}
           >

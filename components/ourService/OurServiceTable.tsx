@@ -240,7 +240,7 @@ export default function OurServicesTable() {
   
 
   return (
-    <div className="p-6">
+    <div>
       <DataTable
         data={ourServices}
         columns={ourServiceColumns}

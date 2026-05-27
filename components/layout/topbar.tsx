@@ -9,7 +9,7 @@ type TopbarProps = {
 
 export function Topbar({ onToggleSidebar }: TopbarProps) {
   return (
-    <header className="h-20 border-b bg-white flex items-center justify-between px-4">
+    <header className="h-15 border-b bg-white flex items-center justify-between shadow-md mb-6">
       {/* Left side: toggle + title (optional) */}
       <div className="flex items-center gap-3">
         <button
@@ -25,7 +25,7 @@ export function Topbar({ onToggleSidebar }: TopbarProps) {
       </div>
 
       {/* Right side (future actions) */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 p-2">
 
         <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white text-sm font-bold">
           A
