@@ -27,6 +27,16 @@ export const planVideoColumns: ColumnDef<any>[] = [
     size: 150,
   },
   {
+    accessorKey: "plan.name_en",
+    header: "Plan Name (EN)",
+    size: 150,
+  },
+  {
+    accessorKey: "module.module_name_en",
+    header: "Module Name (EN)",
+    size: 150,
+  },
+  {
     accessorKey: "video_link",
     header: "Video Link",
     size: 300,
