@@ -3,20 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect } from "react";
-import { Controller } from "react-hook-form";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import FormSelect from "../common/FormSelect";
 import { usePlans } from "@/hook/usePlans";
 
-export default function PlanForm({ form, onSubmit, editData }: any) {
+export default function ModuleForm({ form, onSubmit, editData }: any) {
   const { register, handleSubmit, reset, control } = form;
 
   const { plans, isLoading } = usePlans();

@@ -4,29 +4,29 @@
 import { useState, useEffect } from "react";
 import DataTable from "@/components/common/DataTable";
 import { orderColumns } from "./OrderColumns";
-import { usePlans } from "@/hook/usePlans";
+import { useOrders } from "@/hook/useOrders";
 import { ColumnPinningState } from "@tanstack/react-table";
 
-export default function PlansTable() {
+export default function OrderTable() {
   const LIMIT = 10; // limit per page
   const [offset, setOffset] = useState(0);
-  const { plans, total, isLoading } = usePlans(LIMIT, offset);
+  const { orders, total, isLoading } = useOrders(LIMIT, offset);
   
    // dynamic column pinning state
    const [columnPinning, setColumnPinning] = useState<ColumnPinningState>({
-    left: ["no", "name_en"],
+    left: ["no", "user_name"],
     right: ["actions"],
   });
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        // Mobile phone: Unpin everything so it scrolls nicely
+        // Mobile phone: Unpin columns
         setColumnPinning({ left: [], right: [] });
       } else {
-        // Desktop/Tablet: Keep your clean layout locks
+        // Desktop/Tablet: Pin columns
         setColumnPinning({
-          left: ["no", "name_en"],
+          left: ["no", "user_name"],
           right: ["actions"],
         });
       }
@@ -42,7 +42,7 @@ export default function PlansTable() {
   return (
     <div>
       <DataTable
-        data={plans}
+        data={orders}
         columns={orderColumns}
         total={total}
         limit={LIMIT}

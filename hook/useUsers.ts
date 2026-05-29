@@ -1,46 +1,47 @@
+
+
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { userService } from "@/services/userService";
 
-export const useusers = () => {
+export const useUsers = (limit = 2, offset = 0) => {
   const queryClient = useQueryClient();
 
-  // GET
   const usersQuery = useQuery({
-    queryKey: ["users"],
-    queryFn: userService.getAll,
+    queryKey: ["users", limit, offset],
+    queryFn: () => userService.getAll({ limit, offset }),
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
+
 
   // CREATE
   const createMutation = useMutation({
-    mutationFn: userService.create,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["users"] });
-    },
+    mutationFn: (data: any) => userService.create(data),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["users"] }),
   });
 
   // UPDATE
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: any) =>
-    userService.update(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["users"] });
-    },
+    mutationFn: ({ uuid, data }: any) => userService.update(uuid, data),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["users"] }),
   });
 
   // DELETE
   const deleteMutation = useMutation({
-    mutationFn: userService.remove,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["users"] });
-    },
+    mutationFn: (uuid: string) => userService.remove(uuid),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["users"] }),
   });
-
+  
   return {
-    users: usersQuery.data?.data || [],
+    users: usersQuery.data?.data ?? [],
+    total: usersQuery.data?.metadata?.info?.total ?? 0,
     isLoading: usersQuery.isLoading,
-
-    createUser: createMutation.mutate,
-    updateUser: updateMutation.mutate,
-    deleteUser: deleteMutation.mutate,
+  
+    createUser: createMutation.mutateAsync,
+    updateUser: updateMutation.mutateAsync,
+    deleteUser: deleteMutation.mutateAsync,
   };
 };

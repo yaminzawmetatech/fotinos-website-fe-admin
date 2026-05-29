@@ -1,7 +1,7 @@
 "use client";
 
 import OurServiceModal from "@/components/ourService/OurServiceModal";
-import OurServicesTable from "@/components/ourService/OurServiceTable";
+import OurServiceTable from "@/components/ourService/OurServiceTable";
 import { Button } from "@/components/ui/button";
 import { useOurServiceStore } from "@/store/useOurServiceStore";
 
@@ -25,7 +25,7 @@ export default function ServicesPage() {
         </Button>
       </div>
 
-      <OurServicesTable />
+      <OurServiceTable />
       <OurServiceModal />
     </div>
   );

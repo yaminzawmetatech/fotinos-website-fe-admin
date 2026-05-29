@@ -3,18 +3,18 @@
 
 import { useState, useEffect } from "react";
 import DataTable from "@/components/common/DataTable";
-import { planColumns } from "./PlanColumns";
-import { usePlans } from "@/hook/usePlans";
+import { userColumns } from "./UserColumns";
 import { ColumnPinningState } from "@tanstack/react-table";
+import { useUsers } from "@/hook/useUsers";
 
-export default function PlanTable() {
+export default function UserTable() {
   const LIMIT = 10; // limit per page
   const [offset, setOffset] = useState(0);
-  const { plans, total, isLoading } = usePlans(LIMIT, offset);
+  const { users, total, isLoading } = useUsers(LIMIT, offset);
   
    // dynamic column pinning state
    const [columnPinning, setColumnPinning] = useState<ColumnPinningState>({
-    left: ["no", "name_en"],
+    left: [],
     right: ["actions"],
   });
 
@@ -26,7 +26,7 @@ export default function PlanTable() {
       } else {
         // Desktop/Tablet: Pin columns
         setColumnPinning({
-          left: ["no", "name_en"],
+          left: [],
           right: ["actions"],
         });
       }
@@ -42,8 +42,8 @@ export default function PlanTable() {
   return (
     <div>
       <DataTable
-        data={plans}
-        columns={planColumns}
+        data={users}
+        columns={userColumns}
         total={total}
         limit={LIMIT}
         offset={offset}

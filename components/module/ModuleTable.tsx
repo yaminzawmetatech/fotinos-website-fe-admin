@@ -7,7 +7,7 @@ import { moduleColumns } from "./ModuleColumns";
 import { useModules } from "@/hook/useModules";
 import { ColumnPinningState } from "@tanstack/react-table";
 
-export default function ModulesTable() {
+export default function ModuleTable() {
   const LIMIT = 10; // limit per page
   const [offset, setOffset] = useState(0);
   const { modules, total, isLoading } = useModules(LIMIT, offset);

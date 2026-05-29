@@ -1,17 +1,18 @@
 "use client";
 
-import { Home, Users, Settings,Blocks, BadgeDollarSign, NotebookPen, Video, Layers  } from "lucide-react";
+import { Home, Users, Settings,Blocks, BadgeDollarSign, NotebookPen, Video, Layers, ShoppingCart   } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const menuItems = [
   { href: "/dashboard", label: "Dashboard", icon: Home },
-  // { href: "/dashboard/dashboard", label: "Users", icon: Users },
+  { href: "/dashboard/users", label: "Users", icon: Users },
   { href: "/dashboard/services", label: "Services", icon: Blocks },
   { href: "/dashboard/payment-methods", label: "Payment Methods", icon: BadgeDollarSign },
   { href: "/dashboard/plans", label: "Plans", icon: NotebookPen  },
   { href: "/dashboard/modules", label: "Modules", icon: Layers  },
   { href: "/dashboard/plan-videos", label: "Plan Videos", icon: Video  },
+  { href: "/dashboard/orders", label: "Orders", icon: ShoppingCart  },
   // { href: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 
