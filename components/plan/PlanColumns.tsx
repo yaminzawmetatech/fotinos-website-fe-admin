@@ -127,6 +127,11 @@ export const planColumns: ColumnDef<any>[] = [
     size: 150,
   },
   {
+    accessorKey: "service.name_en",
+    header: "Service Name (EN)",
+    size: 150,
+  },
+  {
     accessorKey: "price",
     header: "Price",
     size: 120,

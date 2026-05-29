@@ -64,7 +64,6 @@ export function Sidebar() {
     //     © 2026 Fotinos IT Solutions
     //   </div>
     // </div>
-
       // 1. Change w-64 to w-16 on mobile, md:w-64 on desktop
       <div className="w-16 md:w-64 h-screen border-r bg-white flex flex-col transition-all">
         
@@ -112,7 +111,8 @@ export function Sidebar() {
         {/* 4. Hide footer notice text completely on mobile viewports */}
         <div className="p-4 border-t text-xs text-gray-400 hidden md:block">
           © 2026 Fotinos IT Solutions
-        </div>
-      </div>
+
+</div>
+    </div>
   );
 }
