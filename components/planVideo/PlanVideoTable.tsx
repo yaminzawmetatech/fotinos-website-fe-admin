@@ -7,7 +7,7 @@ import { planVideoColumns } from "./PlanVideoColumns";
 import { usePlanVideos } from "@/hook/usePlanVideos";
 import { ColumnPinningState } from "@tanstack/react-table";
 
-export default function PlanVideosTable() {
+export default function PlanVideoTable() {
   const LIMIT = 10; // limit per page
   const [offset, setOffset] = useState(0);
   const { planVideos, total, isLoading } = usePlanVideos(LIMIT, offset);

@@ -3,9 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { usePaymentMethodStore } from "@/store/usePaymentMethodStore";
 import PaymentMethodModal from "@/components/paymentMethod/PaymentMethodModal";
-import PaymentMethodsTable from "@/components/paymentMethod/PaymentMethodTable";
+import PaymentMethodTable from "@/components/paymentMethod/PaymentMethodTable";
 
-export default function UsersPage() {
+export default function PaymentMethodsPage() {
   const { setCreateModalOpen } = usePaymentMethodStore();
 
   return (
@@ -21,7 +21,7 @@ export default function UsersPage() {
         </Button>
       </div>
 
-      <PaymentMethodsTable />
+      <PaymentMethodTable />
       <PaymentMethodModal />
     </div>
   );

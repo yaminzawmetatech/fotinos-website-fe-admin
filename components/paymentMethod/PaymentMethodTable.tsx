@@ -3,12 +3,12 @@
 
 import { useState } from "react";
 import DataTable from "@/components/common/DataTable";
-import { paymentMethodsColumns } from "./PaymentMethodColumns";
+import { paymentMethodColumns } from "./PaymentMethodColumns";
 import { usePaymentMethods } from "@/hook/usePaymentMethods";
 import { ColumnPinningState } from "@tanstack/react-table";
 
 
-export default function PaymentMethodsTable() {
+export default function PaymentMethodTable() {
   const LIMIT = 10; // limit per page
   const [offset, setOffset] = useState(0);
   const { paymentMethods, total, isLoading } = usePaymentMethods(LIMIT, offset);
@@ -24,7 +24,7 @@ export default function PaymentMethodsTable() {
     <div>
       <DataTable
         data={paymentMethods}
-        columns={paymentMethodsColumns}
+        columns={paymentMethodColumns}
         total={total}
         limit={LIMIT}
         offset={offset}

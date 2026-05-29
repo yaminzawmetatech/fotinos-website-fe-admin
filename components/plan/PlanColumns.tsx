@@ -87,6 +87,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { usePlanStore } from "@/store/usePlanStore";
 import { usePlans } from "@/hook/usePlans";
+import { currencyFormat } from "@/lib/currencyFormat";
 
 export const planColumns: ColumnDef<any>[] = [
   {
@@ -134,6 +135,8 @@ export const planColumns: ColumnDef<any>[] = [
     accessorKey: "price",
     header: "Price",
     size: 120,
+    cell: ({ getValue }) => currencyFormat(getValue<string | number>()),
+
   },
   {
     id: "actions",

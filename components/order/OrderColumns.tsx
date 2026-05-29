@@ -2,8 +2,9 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { usePlanStore } from "@/store/usePlanStore";
-import { usePlans } from "@/hook/usePlans";
+import { useOrderStore } from "@/store/useOrderStore";
+import { useOrders } from "@/hook/useOrders";
+import { currencyFormat } from "@/lib/currencyFormat";
 
 export const orderColumns: ColumnDef<any>[] = [
   {
@@ -13,19 +14,21 @@ export const orderColumns: ColumnDef<any>[] = [
     size: 60,
   },
   {
-    accessorKey: "plan_id",
-    header: "Plan",
+    id: "user_name",
+    accessorKey: "user.name",
+    header: "User",
     size: 150,
   },
   {
-    accessorKey: "user_id",
-    header: "User",
+    accessorKey: "plan.name_en",
+    header: "Plan",
     size: 150,
   },
   {
     accessorKey: "total_amount",
     header: "Total Amount",
     size: 150,
+    cell: ({ getValue }) => currencyFormat(getValue<string | number>()),
   },
   {
     accessorKey: "status",
@@ -33,7 +36,7 @@ export const orderColumns: ColumnDef<any>[] = [
     size: 150,
   },
   {
-    accessorKey: "payment_method_id",
+    accessorKey: "payment_method.name_en",
     header: "Payment Method",
     size: 150,
   },
@@ -43,8 +46,8 @@ export const orderColumns: ColumnDef<any>[] = [
     size: 150,
     cell: ({ row }) => {
       const item = row.original;
-      const { setEditData, setCreateModalOpen } = usePlanStore();
-      const { deletePlan } = usePlans();
+      const { setEditData, setCreateModalOpen } = useOrderStore();
+      const { deleteOrder } = useOrders();
 
       return (
         <div className="flex gap-2">
@@ -64,7 +67,7 @@ export const orderColumns: ColumnDef<any>[] = [
             variant="destructive"
             onClick={async () => {
               if (confirm("Are you sure?")) {
-                await deletePlan(item.uuid);
+                await deleteOrder(item.uuid);
               }
             }}
           >

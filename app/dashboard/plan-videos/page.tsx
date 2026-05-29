@@ -2,10 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { usePlanVideoStore } from "@/store/usePlanVideoStore";
-import PlanVideosTable from "@/components/planVideo/PlanVideoTable";
+import PlanVideoTable from "@/components/planVideo/PlanVideoTable";
 import PlanVideoModal from "@/components/planVideo/PlanVideoModal";
 
-export default function UsersPage() {
+export default function PlanVideosPage() {
   const { setCreateModalOpen } = usePlanVideoStore();
 
   return (
@@ -21,7 +21,7 @@ export default function UsersPage() {
         </Button>
       </div>
 
-      <PlanVideosTable />
+      <PlanVideoTable />
       <PlanVideoModal />
     </div>
   );

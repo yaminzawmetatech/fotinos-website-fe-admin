@@ -222,12 +222,12 @@
 
 import { useState } from "react";
 import { useOurServices } from "@/hook/useOurServices";
-import { ourServiceColumns } from "./columns";
+import { ourServiceColumns } from "./ourServiceColumns";
 import DataTable from "@/components/common/DataTable";
 import { ColumnPinningState } from "@tanstack/react-table";
 
 
-export default function OurServicesTable() {
+export default function OurServiceTable() {
   const LIMIT = 10; // limit per page
   const [offset, setOffset] = useState(0);
   const { ourServices, total, isLoading } = useOurServices(LIMIT, offset);

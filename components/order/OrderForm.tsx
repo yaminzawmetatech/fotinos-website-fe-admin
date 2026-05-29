@@ -4,13 +4,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState, useRef } from "react";
 import { useOurServices } from "@/hook/useOurServices";
-import { Controller } from "react-hook-form";
 import FormSelect from "../common/FormSelect";
 import { toBase64 } from "@/lib/file";
 import { usePlans } from "@/hook/usePlans";
+import { usePaymentMethods } from "@/hook/usePaymentMethods";
+
+const ORDER_STATUS_OPTIONS = [
+  { id: "pending", name: "Pending" },
+  { id: "submit", name: "Submit" },
+  { id: "cancelled", name: "Cancelled" },
+];
 
 
-export default function PlanForm({ form, onSubmit, editData }: any) {
+export default function OrderForm({ form, onSubmit, editData }: any) {
   const { register, handleSubmit, reset, control } = form;
 
   const [image, setImage] = useState<File | null>(null);
@@ -18,20 +24,19 @@ export default function PlanForm({ form, onSubmit, editData }: any) {
 
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const { ourServices, isLoading } = useOurServices();
+  const { paymentMethods, isLoading } = usePaymentMethods();
   const { plans, isLoading: planLoading } = usePlans();
 
-
   // Format array payload into simple standard options
-  const serviceOptions = (ourServices || []).map((service: any) => ({
-    id: service.id,
-    name: service.name_en,
-  }));
-
-   // Format array payload into simple standard options
-   const planOptions = (plans || []).map((plan: any) => ({
+  const planOptions = (plans || []).map((plan: any) => ({
     id: plan.id,
     name: plan.name_en,
+  }));
+
+  // Format array payload into simple standard options
+  const paymentMethodOptions = (paymentMethods || []).map((payment_method: any) => ({
+    id: payment_method.id,
+    name: payment_method.name_en,
   }));
 
   useEffect(() => {
@@ -56,14 +61,14 @@ export default function PlanForm({ form, onSubmit, editData }: any) {
   const submitHandler = async (data: any) => {
 
     let base64Image = null;
-  
+
     if (image) {
       base64Image = await toBase64(image);
     }
 
     const payload = {
       plan_id: data.plan_id,
-      user_id: data.user_id,
+      user_id: 1, //data.user_id
       total_amount: data.total_amount,
       status: data.status,
       payment_method_id: data.payment_method_id,
@@ -84,7 +89,7 @@ export default function PlanForm({ form, onSubmit, editData }: any) {
         rules={{ required: "Plan is required" }}
       />
 
-      {/* Plan Selection */}
+      {/* User Selection */}
       <FormSelect
         name="user_id"
         control={control}
@@ -93,64 +98,30 @@ export default function PlanForm({ form, onSubmit, editData }: any) {
         rules={{ required: "User is required" }}
       />
 
-
-
-
-
-
-
-
-
-      {/* NAME MM */}
+      {/* Total Amount */}
       <div>
-        <label className="text-sm font-medium block mb-1">Name (MM)</label>
-        <Input {...register("name_mm")} required />
+        <label className="text-sm font-medium block mb-1">Total Amount</label>
+        <Input {...register("total_amount")} required />
       </div>
 
-      {/* SERVICE SELECT ELEMENT */}
+      {/* Status Selection */}
       <FormSelect
-        name="service_id"
+        name="status"
         control={control}
-        options={serviceOptions}
-        label="Service"
-        rules={{ required: "Service is required" }}
+        options={ORDER_STATUS_OPTIONS}
+        label="Stauts"
+        rules={{ required: "Status is required" }}
       />
 
-      {/* DESCRIPTION EN */}
-      <div>
-        <label className="text-sm font-medium block mb-1">Description (EN)</label>
-        <Input
-          {...register("description_en")}
-          className="h-24 !items-start !py-3"
-        />
-      </div>
 
-      {/* DESCRIPTION MM */}
-      <div>
-        <label className="text-sm font-medium block mb-1">Description (MM)</label>
-        <Input
-          {...register("description_mm")}
-          className="h-24 !items-start !py-3"
-        />
-      </div>
-
-      {/* OUTLINE EN */}
-      <div>
-        <label className="text-sm font-medium block mb-1">Outline (EN)</label>
-        <Input {...register("outline_en")} required />
-      </div>
-
-      {/* OUTLINE MM */}
-      <div>
-        <label className="text-sm font-medium block mb-1">Outline (MM)</label>
-        <Input {...register("outline_mm")} required />
-      </div>
-
-      {/* PRICE */}
-      <div>
-        <label className="text-sm font-medium block mb-1">Price</label>
-        <Input {...register("price")} required />
-      </div>
+      {/* User Selection */}
+      <FormSelect
+        name="payment_method_id"
+        control={control}
+        options={paymentMethodOptions}
+        label="Payment Method"
+        rules={{ required: "Payment Method is required" }}
+      />
 
       {/* ================= IMAGE ================= */}
       <div>
@@ -211,7 +182,7 @@ export default function PlanForm({ form, onSubmit, editData }: any) {
 
       {/* SUBMIT BUTTON */}
       <Button type="submit" className="w-full">
-        {editData ? "Update Plan" : "Create Plan"}
+        {editData ? "Update Order" : "Create Order"}
       </Button>
     </form>
   );
