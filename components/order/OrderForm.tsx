@@ -7,6 +7,7 @@ import { useOurServices } from "@/hook/useOurServices";
 import FormSelect from "../common/FormSelect";
 import { toBase64 } from "@/lib/file";
 import { usePlans } from "@/hook/usePlans";
+import { useUsers } from "@/hook/useUsers";
 import { usePaymentMethods } from "@/hook/usePaymentMethods";
 
 const ORDER_STATUS_OPTIONS = [
@@ -26,11 +27,17 @@ export default function OrderForm({ form, onSubmit, editData }: any) {
 
   const { paymentMethods, isLoading } = usePaymentMethods();
   const { plans, isLoading: planLoading } = usePlans();
+  const { users, isLoading: userLoading } = useUsers();
 
   // Format array payload into simple standard options
   const planOptions = (plans || []).map((plan: any) => ({
     id: plan.id,
     name: plan.name_en,
+  }));
+
+  const userOptions = (users || []).map((user: any) => ({
+    id: user.id,
+    name: user.name,
   }));
 
   // Format array payload into simple standard options
@@ -68,7 +75,7 @@ export default function OrderForm({ form, onSubmit, editData }: any) {
 
     const payload = {
       plan_id: data.plan_id,
-      user_id: 1, //data.user_id
+      user_id: data.user_id, //data.user_id
       total_amount: data.total_amount,
       status: data.status,
       payment_method_id: data.payment_method_id,
@@ -93,7 +100,7 @@ export default function OrderForm({ form, onSubmit, editData }: any) {
       <FormSelect
         name="user_id"
         control={control}
-        options={planOptions}
+        options={userOptions}
         label="User"
         rules={{ required: "User is required" }}
       />

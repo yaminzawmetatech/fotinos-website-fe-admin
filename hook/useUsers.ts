@@ -3,7 +3,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { userService } from "@/services/userService";
 
-export const useUsers = (limit = 2, offset = 0) => {
+export const useUsers = (limit = 10, offset = 0) => {
   const queryClient = useQueryClient();
 
   const usersQuery = useQuery({
