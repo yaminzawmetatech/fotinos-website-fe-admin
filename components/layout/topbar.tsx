@@ -23,6 +23,7 @@ export function Topbar({ onToggleSidebar }: TopbarProps) {
     "/dashboard/plans": "Plans",
     "/dashboard/modules": "Modules",
     "/dashboard/plan-videos": "Plan Videos",
+    "/dashboard/case-studies": "Case Studies",
     "/dashboard/settings": "Settings",
   };
 

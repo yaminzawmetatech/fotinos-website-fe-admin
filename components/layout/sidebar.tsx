@@ -12,6 +12,7 @@ const menuItems = [
   { href: "/dashboard/plans", label: "Plans", icon: NotebookPen  },
   { href: "/dashboard/modules", label: "Modules", icon: Layers  },
   { href: "/dashboard/plan-videos", label: "Plan Videos", icon: Video  },
+  { href: "/dashboard/case-studies", label: "Case Studies", icon: Layers  },
   { href: "/dashboard/orders", label: "Orders", icon: ShoppingCart  },
   // { href: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
