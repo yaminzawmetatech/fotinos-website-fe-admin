@@ -11,9 +11,10 @@ import { useUsers } from "@/hook/useUsers";
 import { usePaymentMethods } from "@/hook/usePaymentMethods";
 
 const ORDER_STATUS_OPTIONS = [
-  { id: "pending", name: "Pending" },
-  { id: "submit", name: "Submit" },
-  { id: "cancelled", name: "Cancelled" },
+  { id: "PENDING", name: "PENDING" },
+  { id: "SUBMIT", name: "SUBMIT" },
+  { id: "CANCELLED", name: "CANCELLED" },
+  { id: "CONFIRMED", name: "CONFIRMED" },
 ];
 
 
