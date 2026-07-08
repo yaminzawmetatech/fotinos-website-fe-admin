@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useOurServices } from "@/hook/useOurServices";
 import FormSelect from "../common/FormSelect";
 
@@ -15,13 +15,46 @@ type RichTextEditorProps = {
 };
 
 function RichTextEditor({ value, onChange, placeholder }: RichTextEditorProps) {
+  const editorRef = useRef<any>(null);
+
+  const insertLink = () => {
+    const editor = editorRef.current;
+    if (!editor) return;
+
+    const url = window.prompt("Enter URL", "https://");
+    if (!url) return;
+
+    editor.execute("link", {
+      href: url,
+      target: "_blank",
+      rel: "noopener noreferrer",
+    });
+    editor.focus();
+  };
+
   return (
     <div className="overflow-hidden rounded-xl border border-orange-200/80 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.05)]">
+      <div className="flex items-center justify-between border-b border-orange-100 bg-orange-50/70 px-3 py-2">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-orange-600">
+          Editor
+        </span>
+        <button
+          type="button"
+          onClick={insertLink}
+          className="rounded-md border border-orange-200 bg-white px-2.5 py-1.5 text-sm text-slate-700 transition hover:border-orange-400 hover:text-orange-600"
+        >
+          Insert Link
+        </button>
+      </div>
+
       <CKEditor
         editor={ClassicEditor as any}
         config={{
           placeholder,
           toolbar: ["bold", "italic", "underline", "bulletedList", "numberedList", "link"],
+        }}
+        onReady={(editor: any) => {
+          editorRef.current = editor;
         }}
         onChange={(_event: any, editor: any) => {
           const data = editor.getData();
