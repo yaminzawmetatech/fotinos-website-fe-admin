@@ -24,11 +24,9 @@ function RichTextEditor({ value, onChange, placeholder }: RichTextEditorProps) {
     const url = window.prompt("Enter URL", "https://");
     if (!url) return;
 
-    editor.execute("link", {
-      href: url,
-      target: "_blank",
-      rel: "noopener noreferrer",
-    });
+    const currentData = editor.getData();
+    const linkHtml = `<a href="${url}" target="_blank" rel="noopener noreferrer">${currentData || "link"}</a>`;
+    editor.setData(linkHtml);
     editor.focus();
   };
 
