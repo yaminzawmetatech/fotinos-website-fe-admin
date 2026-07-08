@@ -116,16 +116,16 @@ export const planColumns: ColumnDef<any>[] = [
     header: "Description (MM)",
     size: 150,
   },
-  {
-    accessorKey: "outline_en",
-    header: "Outline (EN)",
-    size: 150,
-  },
-  {
-    accessorKey: "outline_mm",
-    header: "Outline (MM)",
-    size: 150,
-  },
+  // {
+  //   accessorKey: "outline_en",
+  //   header: "Outline (EN)",
+  //   size: 150,
+  // },
+  // {
+  //   accessorKey: "outline_mm",
+  //   header: "Outline (MM)",
+  //   size: 150,
+  // },
   {
     accessorKey: "service.name_en",
     header: "Service Name (EN)",
