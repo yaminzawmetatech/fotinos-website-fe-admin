@@ -2,14 +2,42 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useEffect } from "react";
 import { useOurServices } from "@/hook/useOurServices";
 import FormSelect from "../common/FormSelect";
 
+type RichTextEditorProps = {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+};
+
+function RichTextEditor({ value, onChange, placeholder }: RichTextEditorProps) {
+  return (
+    <div className="overflow-hidden rounded-xl border border-orange-200/80 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.05)]">
+      <CKEditor
+        editor={ClassicEditor as any}
+        config={{
+          placeholder,
+          toolbar: ["bold", "italic", "underline", "bulletedList", "numberedList", "link"],
+        }}
+        onChange={(_event: any, editor: any) => {
+          const data = editor.getData();
+          onChange(data);
+        }}
+      />
+    </div>
+  );
+}
+
 export default function PlanForm({ form, onSubmit, editData }: any) {
-  const { register, handleSubmit, reset, control } = form;
+  const { register, handleSubmit, reset, control, setValue, watch } = form;
 
   const { ourServices, isLoading } = useOurServices();
+  const outlineEnValue = watch("outline_en") || "";
+  const outlineMmValue = watch("outline_mm") || "";
 
   // Format array payload into simple standard options
   const serviceOptions = (ourServices || []).map((service: any) => ({
@@ -84,13 +112,31 @@ export default function PlanForm({ form, onSubmit, editData }: any) {
       {/* OUTLINE EN */}
       <div>
         <label className="text-sm font-medium block mb-1">Outline (EN)</label>
-        <Input {...register("outline_en")} required />
+        <RichTextEditor
+          value={outlineEnValue}
+          onChange={(value) =>
+            setValue("outline_en", value, {
+              shouldDirty: true,
+              shouldValidate: true,
+            })
+          }
+          placeholder="Write the plan outline in English"
+        />
       </div>
 
       {/* OUTLINE MM */}
       <div>
         <label className="text-sm font-medium block mb-1">Outline (MM)</label>
-        <Input {...register("outline_mm")} required />
+        <RichTextEditor
+          value={outlineMmValue}
+          onChange={(value) =>
+            setValue("outline_mm", value, {
+              shouldDirty: true,
+              shouldValidate: true,
+            })
+          }
+          placeholder="Write the plan outline in Myanmar"
+        />
       </div>
 
       {/* PRICE */}
