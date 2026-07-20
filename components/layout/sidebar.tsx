@@ -14,6 +14,7 @@ const menuItems = [
   { href: "/dashboard/plan-videos", label: "Plan Videos", icon: Video  },
   { href: "/dashboard/case-studies", label: "Case Studies", icon: Layers  },
   { href: "/dashboard/orders", label: "Orders", icon: ShoppingCart  },
+  { href: "/dashboard/appointments", label: "Appointments", icon: Blocks  },
   // { href: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 
