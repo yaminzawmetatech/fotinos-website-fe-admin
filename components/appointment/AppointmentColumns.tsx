@@ -58,7 +58,7 @@ export const appointmentColumns: ColumnDef<any>[] = [
   {
     id: "actions",
     header: "Actions",
-    size: 120,
+    size: 230,
     cell: ({ row }) => {
       const item = row.original;
       const { setEditData, setCreateModalOpen } = useAppointmentStore();
@@ -88,6 +88,18 @@ export const appointmentColumns: ColumnDef<any>[] = [
             }}
           >
             Delete
+          </Button>
+
+          <Button
+            size="sm"
+            variant="destructive"
+            onClick={() => {
+              setEditData(item);
+              setCreateModalOpen(true);
+            }}
+            className="border-orange-300 text-orange-600 hover:bg-orange-100"
+          >
+            Send Email
           </Button>
         </div>
       );
