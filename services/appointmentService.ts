@@ -22,4 +22,16 @@ export const appointmentService = {
     const res = await apiClient.delete(`/appointments/${uuid}`);
     return res.data;
   },
+
+  confirmCancelEmail: async (data: {
+    uuid: string;
+    meeting_link?: string;
+    status: string;
+  }) => {
+    const res = await apiClient.post(
+      "/sent-confirm-cancel-email",
+      data
+    );
+    return res.data;
+  },
 };

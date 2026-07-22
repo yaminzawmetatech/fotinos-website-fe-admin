@@ -1,5 +1,4 @@
 
-
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { appointmentService } from "@/services/appointmentService";
 
@@ -12,7 +11,6 @@ export const useAppointments = (limit = 10, offset = 0) => {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
-
 
   // CREATE
   const createMutation = useMutation({
@@ -34,14 +32,26 @@ export const useAppointments = (limit = 10, offset = 0) => {
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["modules"] }),
   });
-  
+
+  // CONFIRM / CANCEL EMAIL
+  const confirmCancelEmailMutation = useMutation({
+    mutationFn: (data: {
+      uuid: string;
+      meeting_link?: string;
+      status: string;
+    }) => appointmentService.confirmCancelEmail(data),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["modules"] }),
+  });
+
   return {
     modules: modulesQuery.data?.data ?? [],
     total: modulesQuery.data?.metadata?.info?.total ?? 0,
     isLoading: modulesQuery.isLoading,
-  
+
     createAppointment: createMutation.mutateAsync,
     updateAppointment: updateMutation.mutateAsync,
     deleteAppointment: deleteMutation.mutateAsync,
+    confirmAppointment: confirmCancelEmailMutation.mutateAsync,
   };
 };
