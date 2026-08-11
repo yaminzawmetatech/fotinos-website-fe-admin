@@ -5,12 +5,12 @@ import { Input } from "@/components/ui/input";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useEffect, useRef, useState } from "react";
-import type { UseFormReturn } from "react-hook-form";
+import type { Control, UseFormReturn } from "react-hook-form";
 import { useOurServices } from "@/hook/useOurServices";
 import FormSelect from "../common/FormSelect";
 import { toBase64 } from "@/lib/file";
 
-type PlanFormValues = {
+export type PlanFormValues = {
   service_id?: string | number;
   name_en?: string;
   name_mm?: string;
@@ -35,7 +35,7 @@ type RichTextEditorProps = {
 };
 
 function RichTextEditor({ value, onChange, placeholder }: RichTextEditorProps) {
-  const editorRef = useRef<InstanceType<typeof ClassicEditor> | null>(null);
+  const editorRef = useRef<any | null>(null);
 
   useEffect(() => {
     const editor = editorRef.current;
@@ -169,7 +169,7 @@ export default function PlanForm({ form, onSubmit, editData }: PlanFormProps) {
   }));
 
   const submitHandler = async (data: PlanFormValues) => {
-    let base64Image = null;
+    let base64Image: string | undefined = undefined;
       
     if (image) {
       base64Image = await toBase64(image);
@@ -206,7 +206,7 @@ export default function PlanForm({ form, onSubmit, editData }: PlanFormProps) {
       {/* SERVICE SELECT ELEMENT */}
       <FormSelect
         name="service_id"
-        control={control}
+        control={control as Control<any>}
         options={serviceOptions}
         label="Service"
         rules={{ required: "Service is required" }}

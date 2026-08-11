@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useForm } from "react-hook-form";
-import PlanForm from "./PlanForm";
+import PlanForm, { type PlanFormValues } from "./PlanForm";
 import { toast } from "@/lib/toast";
 import { usePlanStore } from "@/store/usePlanStore";
 import { usePlans } from "@/hook/usePlans";
@@ -16,7 +16,7 @@ export default function PlanModal() {
   const { createModalOpen, setCreateModalOpen, editData, reset } = usePlanStore();
   const { createPlan, updatePlan } = usePlans();
 
-  const form = useForm({
+  const form = useForm<PlanFormValues>({
     defaultValues: {
       service_id: "",
       name_en: "",
@@ -24,6 +24,8 @@ export default function PlanModal() {
       price: "",
       outline_en: "",
       outline_mm: "",
+      description_en: "",
+      description_mm: "",
     },
   });
 
