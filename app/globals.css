@@ -128,3 +128,18 @@
     @apply font-sans;
   }
 }
+
+.ck-editor__editable_inline {
+  min-height: 180px;
+  border: 0 !important;
+  padding: 0.75rem 1rem !important;
+}
+
+.ck-editor__top {
+  border-bottom: 1px solid #fed7aa !important;
+}
+
+.ck-toolbar {
+  background: #fff7ed !important;
+  border: 0 !important;
+}
