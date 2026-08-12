@@ -179,7 +179,7 @@ export default function LoginPage() {
         // Save token in cookies
         Cookies.set("jwt_authorization", access_token, {
           expires: 7,
-          secure: true,
+          secure: false,
           sameSite: "strict",
         });
       }
