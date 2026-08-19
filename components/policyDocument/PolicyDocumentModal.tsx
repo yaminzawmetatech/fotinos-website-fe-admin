@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import {
   Dialog,
   DialogContent,
@@ -7,7 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useForm } from "react-hook-form";
-import PolicyDocumentForm from "./PolicyDocumentForm";
+import PolicyDocumentForm, { type PolicyDocumentFormValues } from "./PolicyDocumentForm";
 import { toast } from "@/lib/toast";
 import { usePolicyDocumentStore } from "@/store/usePolicyDocumentStore";
 import { usePolicyDocuments } from "@/hook/usePolicyDocuments";
@@ -16,13 +17,13 @@ export default function ContactUsModal() {
   const { createModalOpen, setCreateModalOpen, editData, reset } = usePolicyDocumentStore();
   const { createPolicyDocument, updatePolicyDocument } = usePolicyDocuments();
 
-  const form = useForm({
+  const form = useForm<PolicyDocumentFormValues>({
     defaultValues: {
       document_type: "",
       title: "",
       content: "",
-      is_view: "",
-      is_downloadable: ""
+      is_view: false,
+      is_downloadable: false,
     },
   });
 
@@ -34,14 +35,14 @@ export default function ContactUsModal() {
         document_type: "",
         title: "",
         content: "",
-        is_view: "",
-        is_downloadable: ""
+        is_view: false,
+        is_downloadable: false,
       });
       reset(); // Clears editData from Zustand
     }
   };
 
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: PolicyDocumentFormValues) => {
     try {
       if (editData) {
         await updatePolicyDocument({
@@ -57,10 +58,12 @@ export default function ContactUsModal() {
       }
 
       handleClose(false);
-    } catch (error: any) {
-      toast.error(
-        error?.response?.data?.message || "Something went wrong"
-      );
+    } catch (error: unknown) {
+      const message = axios.isAxiosError(error)
+        ? error.response?.data?.message
+        : null;
+
+      toast.error(message || "Something went wrong");
     }
   };
 

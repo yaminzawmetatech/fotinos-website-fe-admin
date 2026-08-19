@@ -70,11 +70,6 @@ export const policyDocumentColumns: ColumnDef<any>[] = [
     size: 150,
   },
   {
-    accessorKey: "content",
-    header: "Content",
-    size: 150,
-  },
-  {
     accessorKey: "is_view",
     header: "IsView",
     size: 150,

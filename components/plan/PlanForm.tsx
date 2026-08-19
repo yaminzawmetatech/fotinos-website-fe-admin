@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import type { ChangeEvent } from "react";
 import type { Control, UseFormReturn } from "react-hook-form";
 import { useOurServices } from "@/hook/useOurServices";
 import FormSelect from "../common/FormSelect";
@@ -34,20 +35,14 @@ type RichTextEditorProps = {
   placeholder: string;
 };
 
+type CKEditorInstance = {
+  getData: () => string;
+  setData: (value: string) => void;
+  focus: () => void;
+};
+
 function RichTextEditor({ value, onChange, placeholder }: RichTextEditorProps) {
-  const editorRef = useRef<any | null>(null);
-
-  useEffect(() => {
-    const editor = editorRef.current;
-    if (!editor) return;
-
-    const nextValue = value ?? "";
-    const currentValue = editor.getData();
-
-    if (currentValue !== nextValue) {
-      editor.setData(nextValue);
-    }
-  }, [value]);
+  const editorRef = useRef<CKEditorInstance | null>(null);
 
   const insertLink = () => {
     const editor = editorRef.current;
@@ -107,12 +102,14 @@ function RichTextEditor({ value, onChange, placeholder }: RichTextEditorProps) {
 
       <CKEditor
         editor={ClassicEditor}
+        data={value ?? ""}
         config={{
           placeholder,
           toolbar: ["bold", "italic", "underline", "bulletedList", "numberedList", "link"],
         }}
         onReady={(editor) => {
           editorRef.current = editor;
+          editor.setData(value ?? "");
         }}
         onChange={(_event, editor) => {
           const data = editor.getData();
@@ -124,44 +121,26 @@ function RichTextEditor({ value, onChange, placeholder }: RichTextEditorProps) {
 }
 
 export default function PlanForm({ form, onSubmit, editData }: PlanFormProps) {
-  const { register, handleSubmit, reset, control, setValue, watch } = form;
+  const { register, handleSubmit, control, setValue, watch } = form;
 
   const { ourServices } = useOurServices();
   const outlineEnValue = watch("outline_en") || "";
   const outlineMmValue = watch("outline_mm") || "";
   const [image, setImage] = useState<File | null>(null);
-    const [preview, setPreview] = useState<string | null>(null);
-  
-    const fileRef = useRef<HTMLInputElement>(null);
-  
-    // =========================
-    // LOAD EDIT DATA
-    // =========================
-    useEffect(() => {
-      if (editData) {
-        reset(editData);
-        setPreview(editData.image_url ?? null); // backend image URL
-        setImage(null);
-      } else {
-        reset();
-        setPreview(null);
-        setImage(null);
-      }
-    }, [editData, reset]);
-  
-    // =========================
-    // FILE SELECT
-    // =========================
-    const handleFile = (file: File) => {
-      setImage(file);
-      setPreview(URL.createObjectURL(file)); // local preview
-    };
-  
-    const handleFileChange = (e: any) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
-      handleFile(file);
-    };
+  const [preview, setPreview] = useState<string | null>(editData?.image_url ?? null);
+
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const handleFile = (file: File) => {
+    setImage(file);
+    setPreview(URL.createObjectURL(file));
+  };
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    handleFile(file);
+  };
   // Format array payload into simple standard options
   const serviceOptions = (ourServices || []).map((service: { id: string | number; name_en: string }) => ({
     id: service.id,
@@ -206,7 +185,7 @@ export default function PlanForm({ form, onSubmit, editData }: PlanFormProps) {
       {/* SERVICE SELECT ELEMENT */}
       <FormSelect
         name="service_id"
-        control={control as Control<any>}
+        control={control as Control<PlanFormValues>}
         options={serviceOptions}
         label="Service"
         rules={{ required: "Service is required" }}
