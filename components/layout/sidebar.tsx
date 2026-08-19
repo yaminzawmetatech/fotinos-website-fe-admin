@@ -16,6 +16,7 @@ const menuItems = [
   { href: "/dashboard/orders", label: "Orders", icon: ShoppingCart  },
   { href: "/dashboard/appointments", label: "Appointments", icon: Blocks  },
   { href: "/dashboard/contact-us", label: "Contact Us", icon: Users  },
+  { href: "/dashboard/policy-documents", label: "Policy Documents", icon: Layers  },
   // { href: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 
