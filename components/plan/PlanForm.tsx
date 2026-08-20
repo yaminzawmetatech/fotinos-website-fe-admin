@@ -6,7 +6,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useRef, useState } from "react";
 import type { ChangeEvent } from "react";
-import type { Control, UseFormReturn } from "react-hook-form";
+import type { UseFormReturn } from "react-hook-form";
 import { useOurServices } from "@/hook/useOurServices";
 import FormSelect from "../common/FormSelect";
 import { toBase64 } from "@/lib/file";
@@ -102,14 +102,13 @@ function RichTextEditor({ value, onChange, placeholder }: RichTextEditorProps) {
 
       <CKEditor
         editor={ClassicEditor}
-        data={value ?? ""}
         config={{
+          initialData: value ?? "",
           placeholder,
           toolbar: ["bold", "italic", "underline", "bulletedList", "numberedList", "link"],
         }}
         onReady={(editor) => {
           editorRef.current = editor;
-          editor.setData(value ?? "");
         }}
         onChange={(_event, editor) => {
           const data = editor.getData();
@@ -185,7 +184,7 @@ export default function PlanForm({ form, onSubmit, editData }: PlanFormProps) {
       {/* SERVICE SELECT ELEMENT */}
       <FormSelect
         name="service_id"
-        control={control as Control<PlanFormValues>}
+        control={control}
         options={serviceOptions}
         label="Service"
         rules={{ required: "Service is required" }}

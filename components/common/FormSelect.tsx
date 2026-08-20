@@ -1,24 +1,30 @@
 "use client";
 
 import Select from "react-select";
-import { Controller, Control } from "react-hook-form";
+import {
+  Controller,
+  type Control,
+  type FieldPath,
+  type FieldValues,
+  type RegisterOptions,
+} from "react-hook-form";
 
 type OptionType = {
   id: string | number;
   name: string;
 };
 
-type Props = {
-  name: string;
-  control: Control<any>;
+type Props<TFieldValues extends FieldValues> = {
+  name: FieldPath<TFieldValues>;
+  control: Control<TFieldValues>;
   options: OptionType[];
   label?: string;
-  rules?: any;
+  rules?: RegisterOptions<TFieldValues, FieldPath<TFieldValues>>;
   getOptionLabel?: (o: OptionType) => string;
   getOptionValue?: (o: OptionType) => string | number;
 };
 
-export default function FormSelect({
+export default function FormSelect<TFieldValues extends FieldValues>({
   name,
   control,
   options,
@@ -26,7 +32,7 @@ export default function FormSelect({
   rules,
   getOptionLabel = (o) => o.name,
   getOptionValue = (o) => o.id,
-}: Props) {
+}: Props<TFieldValues>) {
   return (
     <div className="flex flex-col gap-2">
       {label && (
@@ -34,6 +40,7 @@ export default function FormSelect({
       )}
 
       <Controller
+        <TFieldValues, FieldPath<TFieldValues>>
         name={name}
         control={control}
         rules={rules}

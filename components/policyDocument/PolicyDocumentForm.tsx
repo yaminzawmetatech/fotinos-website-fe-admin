@@ -40,14 +40,13 @@ function RichTextEditor({ value, onChange, placeholder }: RichTextEditorProps) {
 
       <CKEditor
         editor={ClassicEditor}
-        data={value ?? ""}
         config={{
+          initialData: value ?? "",
           placeholder,
           toolbar: ["bold", "italic", "underline", "bulletedList", "numberedList", "link"],
         }}
         onReady={(editor) => {
           editorRef.current = editor;
-          editor.setData(value ?? "");
         }}
         onChange={(_event, editor) => {
           onChange(editor.getData());
