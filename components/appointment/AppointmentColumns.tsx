@@ -148,7 +148,7 @@ export const appointmentColumns: ColumnDef<any>[] = [
   {
     accessorKey: "email",
     header: "Email",
-    size: 150,
+    size: 200,
   },
   {
     accessorKey: "phone",
