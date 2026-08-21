@@ -50,19 +50,19 @@ export default function CaseStudyForm({
   // SUBMIT
   // =========================
   const submitHandler = async (data: any) => {
-    let base64Image = null;
+    //let base64Image = null;
   
-    if (image) {
-      base64Image = await toBase64(image);
-    }
-  
-    const payload = {
+    const payload: any = {
       name_en: data.name_en,
       name_mm: data.name_mm,
       description_en: data.description_en,
       description_mm: data.description_mm,
-      image_url: base64Image, // base64 string
     };
+  
+    // Only update image if a new image was selected
+    if (image) {
+      payload.image_url = await toBase64(image);
+    }
   
     onSubmit(payload);
   };

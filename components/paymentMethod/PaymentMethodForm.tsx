@@ -52,17 +52,21 @@ export default function PaymentMethodForm({
   const submitHandler = async (data: any) => {
     let base64Image = null;
   
-    if (image) {
-      base64Image = await toBase64(image);
-    }
+    // if (image) {
+    //   base64Image = await toBase64(image);
+    // }
   
-    const payload = {
+    const payload: any = {
       name_en: data.name_en,
       name_mm: data.name_mm,
       account_name: data.account_name,
       account_number: data.account_number,
-      image_url: base64Image, // base64 string
+      //image_url: base64Image, // base64 string
     };
+
+    if (image) {
+      payload.image_url = await toBase64(image);
+    }
   
     onSubmit(payload);
   };

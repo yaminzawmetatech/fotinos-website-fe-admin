@@ -12,7 +12,6 @@ import { usePaymentMethods } from "@/hook/usePaymentMethods";
 
 const ORDER_STATUS_OPTIONS = [
   { id: "PENDING", name: "PENDING" },
-  { id: "SUBMIT", name: "SUBMIT" },
   { id: "CANCELLED", name: "CANCELLED" },
   { id: "CONFIRMED", name: "CONFIRMED" },
 ];
@@ -50,8 +49,12 @@ export default function OrderForm({ form, onSubmit, editData }: any) {
   useEffect(() => {
     if (editData) {
       reset(editData);
+      setPreview(editData.screenshot_image_url);
+      setImage(null);
     } else {
       reset();
+      setPreview(null);
+      setImage(null);
     }
   }, [editData, reset]);
 
@@ -68,20 +71,24 @@ export default function OrderForm({ form, onSubmit, editData }: any) {
 
   const submitHandler = async (data: any) => {
 
-    let base64Image = null;
+    //let base64Image = null;
 
-    if (image) {
-      base64Image = await toBase64(image);
-    }
+    // if (image) {
+    //   base64Image = await toBase64(image);
+    // }
 
-    const payload = {
+    const payload: any = {
       plan_id: data.plan_id,
       user_id: data.user_id, //data.user_id
       total_amount: data.total_amount,
       status: data.status,
       payment_method_id: data.payment_method_id,
-      screenshot_image_url: base64Image,
+      //screenshot_image_url: base64Image,
     };
+
+    if (image) {
+      payload.screenshot_image_url = await toBase64(image);
+    }
 
     onSubmit(payload);
   };
@@ -117,7 +124,7 @@ export default function OrderForm({ form, onSubmit, editData }: any) {
         name="status"
         control={control}
         options={ORDER_STATUS_OPTIONS}
-        label="Stauts"
+        label="Status"
         rules={{ required: "Status is required" }}
       />
 
